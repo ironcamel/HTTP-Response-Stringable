@@ -4,7 +4,7 @@ HTTP::Response::Stringable - Makes HTTP::Response objects stringable
 
 # VERSION
 
-version 0.0001
+version 0.0002
 
 # SYNOPSIS
 
@@ -19,9 +19,8 @@ make them stringable.
 
 After applying this role to the response object, you can use it in string
 context.
-The resulting string will be of the form:
-
-    $res->status_line . "\n" . $res->content
+The resulting string is simply the return value of the HTTP::Response
+`as_string` method.
 
 My motivation for creating this module was that I wanted to throw
 `HTTP::Response` objects as exceptions, and exception objects should have a
@@ -30,6 +29,7 @@ Here is an example use case:
 
     package WidgetFactory;
     use Moo;
+    use LWP::UserAgent;
 
     sub create_widget {
         my $res = LWP::UserAgent->new->post('http://widget-factory/widgets');

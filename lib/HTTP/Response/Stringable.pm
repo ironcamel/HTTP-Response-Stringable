@@ -1,6 +1,6 @@
 package HTTP::Response::Stringable;
 use Role::Tiny;
-use overload '""' => sub { $_[0]->status_line . "\n" . $_[0]->content };
+use overload '""' => sub { shift->as_string };
 
 # VERSION
 
@@ -20,9 +20,8 @@ make them stringable.
 
 After applying this role to the response object, you can use it in string
 context.
-The resulting string will be of the form:
-
-    $res->status_line . "\n" . $res->content
+The resulting string is simply the return value of the HTTP::Response
+C<as_string> method.
 
 My motivation for creating this module was that I wanted to throw
 C<HTTP::Response> objects as exceptions, and exception objects should have a
